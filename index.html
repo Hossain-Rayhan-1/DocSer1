@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cisco Command Finder</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  margin: 0;
+  color: white;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.glass {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #00c6ff;
+  color: white;
+  cursor: pointer;
+}
+
+.command {
+  background: rgba(0,0,0,0.3);
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🔧 Cisco Command Finder</h1>
+
+  <div class="glass">
+    <h2>🔍 Cerca comando</h2>
+    <input type="text" id="search" placeholder="Es: cambiare nome router">
+    <div id="results"></div>
+  </div>
+
+  <div class="glass">
+    <h2>🤖 AI Assistant</h2>
+    <textarea id="aiInput" rows="4" placeholder="Es: voglio configurare una rete con IP e accesso ssh"></textarea>
+    <button onclick="analyzeText()">Analizza</button>
+    <div id="aiOutput"></div>
+  </div>
+
+</div>
+
+<script>
+const commands = [
+  {desc:"Entrare modalità privilegiata", cmd:"enable"},
+  {desc:"Configurazione globale", cmd:"configure terminal"},
+  {desc:"Cambiare hostname", cmd:"hostname"},
+  {desc:"Disabilitare DNS lookup", cmd:"no ip domain-lookup"},
+  {desc:"Banner MOTD", cmd:"banner motd"},
+  {desc:"Criptare password", cmd:"service password-encryption"},
+  {desc:"Password enable", cmd:"enable secret"},
+  {desc:"Creare utente", cmd:"username secret"},
+  {desc:"Configurare interfaccia", cmd:"interface"},
+  {desc:"Assegnare IP", cmd:"ip address"},
+  {desc:"Attivare interfaccia", cmd:"no shutdown"},
+  {desc:"Routing statico", cmd:"ip route"},
+  {desc:"Vedere routing", cmd:"show ip route"},
+  {desc:"Configurare SSH", cmd:"ip ssh version 2"},
+  {desc:"Generare chiavi RSA", cmd:"crypto key generate rsa"},
+  {desc:"Configurare VTY", cmd:"line vty"},
+  {desc:"Creare VLAN", cmd:"vlan"},
+  {desc:"Assegnare VLAN", cmd:"switchport access vlan"},
+  {desc:"IP switch", cmd:"ip address vlan"},
+  {desc:"Gateway switch", cmd:"ip default-gateway"},
+  {desc:"Ping", cmd:"ping"},
+  {desc:"Traceroute", cmd:"traceroute"}
+];
+
+// ricerca intelligente
+function searchCommands() {
+  const input = document.getElementById("search").value.toLowerCase();
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = "";
+
+  const results = commands.filter(c =>
+    c.desc.toLowerCase().includes(input) ||
+    c.cmd.toLowerCase().includes(input) ||
+    fuzzyMatch(input, c.desc.toLowerCase())
+  );
+
+  if(results.length === 0){
+    resultsDiv.innerHTML = "❌ Nessun risultato";
+    return;
+  }
+
+  results.forEach(r => {
+    resultsDiv.innerHTML += `
+      <div class="command">
+        <b>${r.desc}</b><br>
+        <code>${r.cmd}</code>
+      </div>`;
+  });
+}
+
+// fuzzy matching semplice
+function fuzzyMatch(input, text){
+  return input.split(" ").every(word =>
+    text.includes(word.substring(0,3))
+  );
+}
+
+document.getElementById("search").addEventListener("input", searchCommands);
+
+// AI simulata
+function analyzeText(){
+  const text = document.getElementById("aiInput").value.toLowerCase();
+  const output = document.getElementById("aiOutput");
+
+  let found = [];
+
+  commands.forEach(c => {
+    if(text.includes("ip") && c.cmd.includes("ip")) found.push(c);
+    if(text.includes("ssh") && c.cmd.includes("ssh")) found.push(c);
+    if(text.includes("hostname") && c.cmd.includes("hostname")) found.push(c);
+    if(text.includes("vlan") && c.cmd.includes("vlan")) found.push(c);
+    if(text.includes("password") && c.desc.includes("password")) found.push(c);
+  });
+
+  if(found.length === 0){
+    output.innerHTML = "🤖 Non ho trovato comandi specifici, prova a essere più preciso.";
+    return;
+  }
+
+  output.innerHTML = "<h3>Comandi suggeriti:</h3>";
+  found.forEach(f => {
+    output.innerHTML += `
+      <div class="command">
+        <b>${f.desc}</b><br>
+        <code>${f.cmd}</code>
+      </div>`;
+  });
+}
+</script>
+
+</body>
+</html>
