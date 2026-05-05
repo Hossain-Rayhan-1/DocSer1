@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cisco Command Finder</title>
+<title>Cisco Command Pro</title>
 
 <style>
 body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
-  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   color: white;
+  margin: 0;
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: auto;
   padding: 20px;
 }
@@ -24,11 +24,11 @@ h1 {
 }
 
 .glass {
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
   border-radius: 15px;
-  padding: 15px;
-  margin: 15px 0;
+  padding: 20px;
+  margin: 20px 0;
 }
 
 input, textarea {
@@ -39,135 +39,146 @@ input, textarea {
   margin-top: 10px;
 }
 
-button {
-  margin-top: 10px;
-  padding: 10px;
-  border: none;
+.cli {
+  background: black;
+  padding: 15px;
   border-radius: 10px;
-  background: #00c6ff;
-  color: white;
-  cursor: pointer;
+  font-family: monospace;
+  height: 300px;
+  overflow-y: auto;
+}
+
+.cli-input {
+  width: 100%;
+  background: black;
+  color: lime;
+  border: none;
+  font-family: monospace;
 }
 
 .command {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.4);
   padding: 10px;
   border-radius: 10px;
   margin-top: 10px;
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+td, th {
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding: 8px;
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="container">
-  <h1>🔧 Cisco Command Finder</h1>
+<h1>🔧 Cisco Command Pro</h1>
 
-  <div class="glass">
-    <h2>🔍 Cerca comando</h2>
-    <input type="text" id="search" placeholder="Es: cambiare nome router">
-    <div id="results"></div>
-  </div>
+<!-- SEARCH -->
+<div class="glass">
+<h2>🔍 Cerca comando</h2>
+<input id="search" placeholder="Es: cambiare nome router">
+<div id="results"></div>
+</div>
 
-  <div class="glass">
-    <h2>🤖 AI Assistant</h2>
-    <textarea id="aiInput" rows="4" placeholder="Es: voglio configurare una rete con IP e accesso ssh"></textarea>
-    <button onclick="analyzeText()">Analizza</button>
-    <div id="aiOutput"></div>
-  </div>
+<!-- TABLE -->
+<div class="glass">
+<h2>📋 Tabella Comandi</h2>
+<table>
+<tr><th>Funzione</th><th>Comando</th><th>Esempio</th></tr>
+<tr><td>Hostname</td><td>hostname</td><td>hostname R1</td></tr>
+<tr><td>IP address</td><td>ip address</td><td>ip address 192.168.1.1 255.255.255.0</td></tr>
+<tr><td>Enable</td><td>enable</td><td>Router> enable</td></tr>
+<tr><td>Routing</td><td>ip route</td><td>ip route 192.168.1.0 255.255.255.0 10.0.0.1</td></tr>
+<tr><td>SSH</td><td>ip ssh version 2</td><td>ip ssh version 2</td></tr>
+</table>
+</div>
+
+<!-- CLI SIMULATOR -->
+<div class="glass">
+<h2>💻 CLI Simulator</h2>
+
+<div id="cli" class="cli"></div>
+<input id="cliInput" class="cli-input" placeholder="Scrivi comando..." autofocus>
+
+</div>
 
 </div>
 
 <script>
 const commands = [
-  {desc:"Entrare modalità privilegiata", cmd:"enable"},
-  {desc:"Configurazione globale", cmd:"configure terminal"},
-  {desc:"Cambiare hostname", cmd:"hostname"},
-  {desc:"Disabilitare DNS lookup", cmd:"no ip domain-lookup"},
-  {desc:"Banner MOTD", cmd:"banner motd"},
-  {desc:"Criptare password", cmd:"service password-encryption"},
-  {desc:"Password enable", cmd:"enable secret"},
-  {desc:"Creare utente", cmd:"username secret"},
-  {desc:"Configurare interfaccia", cmd:"interface"},
-  {desc:"Assegnare IP", cmd:"ip address"},
-  {desc:"Attivare interfaccia", cmd:"no shutdown"},
-  {desc:"Routing statico", cmd:"ip route"},
-  {desc:"Vedere routing", cmd:"show ip route"},
-  {desc:"Configurare SSH", cmd:"ip ssh version 2"},
-  {desc:"Generare chiavi RSA", cmd:"crypto key generate rsa"},
-  {desc:"Configurare VTY", cmd:"line vty"},
-  {desc:"Creare VLAN", cmd:"vlan"},
-  {desc:"Assegnare VLAN", cmd:"switchport access vlan"},
-  {desc:"IP switch", cmd:"ip address vlan"},
-  {desc:"Gateway switch", cmd:"ip default-gateway"},
-  {desc:"Ping", cmd:"ping"},
-  {desc:"Traceroute", cmd:"traceroute"}
+  {desc:"hostname", output:"Hostname configurato"},
+  {desc:"enable", output:"Modalità privilegiata attiva"},
+  {desc:"configure terminal", output:"Entrato in configurazione globale"},
+  {desc:"ip address", output:"IP assegnato correttamente"},
+  {desc:"no shutdown", output:"Interfaccia attivata"},
+  {desc:"ip route", output:"Rotta statica aggiunta"},
+  {desc:"show ip route", output:"Routing Table:\nC 192.168.1.0/24 is directly connected"},
+  {desc:"ping", output:"!!!!! Successo"},
+  {desc:"crypto key generate rsa", output:"Chiavi generate"},
+  {desc:"ip ssh version 2", output:"SSH abilitato"}
 ];
 
-// ricerca intelligente
-function searchCommands() {
-  const input = document.getElementById("search").value.toLowerCase();
-  const resultsDiv = document.getElementById("results");
-  resultsDiv.innerHTML = "";
+const cli = document.getElementById("cli");
+const input = document.getElementById("cliInput");
 
-  const results = commands.filter(c =>
-    c.desc.toLowerCase().includes(input) ||
-    c.cmd.toLowerCase().includes(input) ||
-    fuzzyMatch(input, c.desc.toLowerCase())
-  );
+let mode = "user"; // user, privileged, config
 
-  if(results.length === 0){
-    resultsDiv.innerHTML = "❌ Nessun risultato";
-    return;
+function print(text){
+  cli.innerHTML += text + "<br>";
+  cli.scrollTop = cli.scrollHeight;
+}
+
+function getPrompt(){
+  if(mode==="user") return "Router>";
+  if(mode==="privileged") return "Router#";
+  if(mode==="config") return "Router(config)#";
+}
+
+print("Cisco CLI Simulator");
+
+input.addEventListener("keydown", function(e){
+  if(e.key==="Enter"){
+    const cmd = input.value.toLowerCase();
+    print("<span style='color:lime'>" + getPrompt() + " " + cmd + "</span>");
+
+    // modalità
+    if(cmd==="enable"){ mode="privileged"; }
+    else if(cmd==="configure terminal"){ mode="config"; }
+    else if(cmd==="exit"){ mode="user"; }
+
+    // trova comando
+    let found = commands.find(c => cmd.includes(c.desc));
+
+    if(found){
+      print(found.output);
+    } else {
+      print("% Comando non riconosciuto");
+    }
+
+    input.value="";
   }
+});
 
-  results.forEach(r => {
-    resultsDiv.innerHTML += `
-      <div class="command">
-        <b>${r.desc}</b><br>
-        <code>${r.cmd}</code>
-      </div>`;
+// SEARCH
+document.getElementById("search").addEventListener("input", function(){
+  const val = this.value.toLowerCase();
+  const res = document.getElementById("results");
+  res.innerHTML="";
+
+  commands.forEach(c=>{
+    if(c.desc.includes(val)){
+      res.innerHTML += `<div class="command">${c.desc}</div>`;
+    }
   });
-}
-
-// fuzzy matching semplice
-function fuzzyMatch(input, text){
-  return input.split(" ").every(word =>
-    text.includes(word.substring(0,3))
-  );
-}
-
-document.getElementById("search").addEventListener("input", searchCommands);
-
-// AI simulata
-function analyzeText(){
-  const text = document.getElementById("aiInput").value.toLowerCase();
-  const output = document.getElementById("aiOutput");
-
-  let found = [];
-
-  commands.forEach(c => {
-    if(text.includes("ip") && c.cmd.includes("ip")) found.push(c);
-    if(text.includes("ssh") && c.cmd.includes("ssh")) found.push(c);
-    if(text.includes("hostname") && c.cmd.includes("hostname")) found.push(c);
-    if(text.includes("vlan") && c.cmd.includes("vlan")) found.push(c);
-    if(text.includes("password") && c.desc.includes("password")) found.push(c);
-  });
-
-  if(found.length === 0){
-    output.innerHTML = "🤖 Non ho trovato comandi specifici, prova a essere più preciso.";
-    return;
-  }
-
-  output.innerHTML = "<h3>Comandi suggeriti:</h3>";
-  found.forEach(f => {
-    output.innerHTML += `
-      <div class="command">
-        <b>${f.desc}</b><br>
-        <code>${f.cmd}</code>
-      </div>`;
-  });
-}
+});
 </script>
 
 </body>
