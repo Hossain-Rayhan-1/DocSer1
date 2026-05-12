@@ -3,74 +3,218 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cisco Command Pro</title>
+
+<title>Cisco Command Pro AI</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-  font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color: white;
-  margin: 0;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 20px;
+body{
+font-family:'Poppins',sans-serif;
+background:
+linear-gradient(rgba(0,0,0,.8),rgba(0,0,0,.9)),
+url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1600&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+color:white;
+overflow-x:hidden;
 }
 
-h1 {
-  text-align: center;
+.container{
+max-width:1400px;
+margin:auto;
+padding:30px;
 }
 
-.glass {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
-  border-radius: 15px;
-  padding: 20px;
-  margin: 20px 0;
+h1{
+text-align:center;
+font-size:55px;
+font-weight:700;
+margin-bottom:20px;
+background:linear-gradient(90deg,#00c6ff,#0072ff);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-input, textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  margin-top: 10px;
+.subtitle{
+text-align:center;
+opacity:.8;
+margin-bottom:40px;
+font-size:18px;
 }
 
-.cli {
-  background: black;
-  padding: 15px;
-  border-radius: 10px;
-  font-family: monospace;
-  height: 300px;
-  overflow-y: auto;
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:25px;
 }
 
-.cli-input {
-  width: 100%;
-  background: black;
-  color: lime;
-  border: none;
-  font-family: monospace;
+.glass{
+background:rgba(255,255,255,0.07);
+border:1px solid rgba(255,255,255,0.1);
+backdrop-filter:blur(15px);
+border-radius:20px;
+padding:25px;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+transition:.3s;
 }
 
-.command {
-  background: rgba(0,0,0,0.4);
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 10px;
+.glass:hover{
+transform:translateY(-5px);
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+h2{
+margin-bottom:20px;
+font-size:24px;
+color:#00c6ff;
 }
 
-td, th {
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-  padding: 8px;
+input, textarea{
+width:100%;
+padding:15px;
+border:none;
+outline:none;
+border-radius:12px;
+background:rgba(255,255,255,0.08);
+color:white;
+font-size:15px;
+margin-top:10px;
+}
+
+textarea{
+height:130px;
+resize:none;
+}
+
+button{
+margin-top:15px;
+padding:14px 20px;
+border:none;
+border-radius:12px;
+background:linear-gradient(90deg,#00c6ff,#0072ff);
+color:white;
+font-weight:600;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+overflow:hidden;
+border-radius:15px;
+}
+
+th{
+background:#0072ff;
+padding:15px;
+font-size:15px;
+}
+
+td{
+padding:15px;
+border-bottom:1px solid rgba(255,255,255,0.1);
+background:rgba(255,255,255,0.03);
+}
+
+tr:hover{
+background:rgba(255,255,255,0.05);
+}
+
+.command-card{
+background:rgba(255,255,255,0.05);
+padding:15px;
+margin-top:15px;
+border-radius:12px;
+border-left:4px solid #00c6ff;
+}
+
+.command-title{
+font-size:18px;
+font-weight:600;
+margin-bottom:10px;
+color:#00c6ff;
+}
+
+.cli{
+background:black;
+padding:20px;
+border-radius:15px;
+height:350px;
+overflow-y:auto;
+font-family:monospace;
+font-size:15px;
+box-shadow:inset 0 0 20px rgba(0,255,0,.2);
+}
+
+.cli-input{
+background:black;
+color:lime;
+font-family:monospace;
+margin-top:10px;
+border:1px solid rgba(0,255,0,.3);
+}
+
+.ai-result{
+margin-top:20px;
+padding:20px;
+border-radius:15px;
+background:rgba(0,114,255,.15);
+border:1px solid rgba(0,114,255,.4);
+}
+
+.badge{
+display:inline-block;
+padding:6px 12px;
+border-radius:30px;
+background:#0072ff;
+margin:5px;
+font-size:13px;
+}
+
+.hero{
+height:250px;
+border-radius:25px;
+background:
+linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+margin-bottom:30px;
+box-shadow:0 15px 40px rgba(0,0,0,.5);
+}
+
+.hero h1{
+font-size:60px;
+}
+
+@media(max-width:1000px){
+
+.grid{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:40px;
+}
+
 }
 
 </style>
@@ -79,106 +223,515 @@ td, th {
 <body>
 
 <div class="container">
-<h1>🔧 Cisco Command Pro</h1>
 
-<!-- SEARCH -->
+<div class="hero">
+<h1>⚡ Cisco Command Pro AI</h1>
+</div>
+
+<p class="subtitle">
+Cisco command encyclopedia + AI assistant + CLI simulator
+</p>
+
+<div class="grid">
+
+<div>
+
 <div class="glass">
-<h2>🔍 Cerca comando</h2>
-<input id="search" placeholder="Es: cambiare nome router">
+
+<h2>🔍 Cerca Comandi Cisco</h2>
+
+<input id="search" placeholder="Es: ssh, vlan, ospf, nat...">
+
 <div id="results"></div>
+
 </div>
 
-<!-- TABLE -->
 <div class="glass">
-<h2>📋 Tabella Comandi</h2>
-<table>
-<tr><th>Funzione</th><th>Comando</th><th>Esempio</th></tr>
-<tr><td>Hostname</td><td>hostname</td><td>hostname R1</td></tr>
-<tr><td>IP address</td><td>ip address</td><td>ip address 192.168.1.1 255.255.255.0</td></tr>
-<tr><td>Enable</td><td>enable</td><td>Router> enable</td></tr>
-<tr><td>Routing</td><td>ip route</td><td>ip route 192.168.1.0 255.255.255.0 10.0.0.1</td></tr>
-<tr><td>SSH</td><td>ip ssh version 2</td><td>ip ssh version 2</td></tr>
-</table>
+
+<h2>🧠 AI Cisco Assistant</h2>
+
+<textarea id="aiText" placeholder="Scrivi cosa vuoi fare...
+
+Esempi:
+- voglio configurare ssh
+- creare vlan
+- impostare routing statico
+- configurare ospf
+"></textarea>
+
+<button onclick="analyzeText()">
+Analizza richiesta
+</button>
+
+<div id="aiResult"></div>
+
 </div>
 
-<!-- CLI SIMULATOR -->
+</div>
+
+<div>
+
 <div class="glass">
-<h2>💻 CLI Simulator</h2>
+
+<h2>💻 Cisco CLI Simulator</h2>
 
 <div id="cli" class="cli"></div>
-<input id="cliInput" class="cli-input" placeholder="Scrivi comando..." autofocus>
+
+<input
+id="cliInput"
+class="cli-input"
+placeholder="Scrivi comando Cisco..."
+autofocus
+>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="glass">
+
+<h2>📚 Database Comandi Cisco</h2>
+
+<table id="commandTable">
+
+<tr>
+<th>Comando</th>
+<th>Cosa Fa</th>
+<th>Esempio</th>
+</tr>
+
+</table>
 
 </div>
 
 </div>
 
 <script>
+
 const commands = [
-  {desc:"hostname", output:"Hostname configurato"},
-  {desc:"enable", output:"Modalità privilegiata attiva"},
-  {desc:"configure terminal", output:"Entrato in configurazione globale"},
-  {desc:"ip address", output:"IP assegnato correttamente"},
-  {desc:"no shutdown", output:"Interfaccia attivata"},
-  {desc:"ip route", output:"Rotta statica aggiunta"},
-  {desc:"show ip route", output:"Routing Table:\nC 192.168.1.0/24 is directly connected"},
-  {desc:"ping", output:"!!!!! Successo"},
-  {desc:"crypto key generate rsa", output:"Chiavi generate"},
-  {desc:"ip ssh version 2", output:"SSH abilitato"}
+
+{
+command:"enable",
+desc:"Entra nella modalità privilegiata",
+example:"Router> enable",
+output:"Modalità privilegiata attiva"
+},
+
+{
+command:"configure terminal",
+desc:"Entra nella configurazione globale",
+example:"Router# configure terminal",
+output:"Entrato in configurazione globale"
+},
+
+{
+command:"hostname",
+desc:"Cambia nome al router",
+example:"hostname R1",
+output:"Hostname configurato"
+},
+
+{
+command:"interface",
+desc:"Entra in una interfaccia",
+example:"interface g0/0",
+output:"Interfaccia aperta"
+},
+
+{
+command:"ip address",
+desc:"Assegna un indirizzo IP",
+example:"ip address 192.168.1.1 255.255.255.0",
+output:"IP assegnato"
+},
+
+{
+command:"no shutdown",
+desc:"Attiva interfaccia",
+example:"no shutdown",
+output:"Interfaccia attivata"
+},
+
+{
+command:"show ip interface brief",
+desc:"Mostra tutte le interfacce",
+example:"show ip interface brief",
+output:"Gig0/0 up up"
+},
+
+{
+command:"show running-config",
+desc:"Mostra configurazione attuale",
+example:"show running-config",
+output:"Current configuration..."
+},
+
+{
+command:"copy running-config startup-config",
+desc:"Salva configurazione",
+example:"copy running-config startup-config",
+output:"Configuration saved"
+},
+
+{
+command:"ip route",
+desc:"Crea routing statico",
+example:"ip route 0.0.0.0 0.0.0.0 10.0.0.1",
+output:"Rotta aggiunta"
+},
+
+{
+command:"router ospf 1",
+desc:"Abilita OSPF",
+example:"router ospf 1",
+output:"OSPF avviato"
+},
+
+{
+command:"network",
+desc:"Aggiunge rete a OSPF",
+example:"network 192.168.1.0 0.0.0.255 area 0",
+output:"Network aggiunta"
+},
+
+{
+command:"vlan",
+desc:"Crea VLAN",
+example:"vlan 10",
+output:"VLAN creata"
+},
+
+{
+command:"switchport access vlan",
+desc:"Assegna VLAN alla porta",
+example:"switchport access vlan 10",
+output:"Porta assegnata alla VLAN"
+},
+
+{
+command:"crypto key generate rsa",
+desc:"Genera chiavi RSA",
+example:"crypto key generate rsa",
+output:"Chiavi RSA generate"
+},
+
+{
+command:"ip ssh version 2",
+desc:"Abilita SSH",
+example:"ip ssh version 2",
+output:"SSH attivato"
+},
+
+{
+command:"username",
+desc:"Crea utente",
+example:"username admin secret cisco",
+output:"Utente creato"
+},
+
+{
+command:"line vty 0 4",
+desc:"Configura accesso remoto",
+example:"line vty 0 4",
+output:"VTY configurato"
+},
+
+{
+command:"access-list",
+desc:"Crea ACL",
+example:"access-list 1 permit any",
+output:"ACL creata"
+},
+
+{
+command:"ping",
+desc:"Testa connettività",
+example:"ping 8.8.8.8",
+output:"!!!!! Success"
+},
+
+{
+command:"traceroute",
+desc:"Mostra percorso pacchetti",
+example:"traceroute 8.8.8.8",
+output:"Tracing route..."
+},
+
+{
+command:"reload",
+desc:"Riavvia dispositivo",
+example:"reload",
+output:"System restarting..."
+},
+
+{
+command:"show vlan brief",
+desc:"Mostra VLAN",
+example:"show vlan brief",
+output:"VLAN 10 active"
+}
+
 ];
 
+const table = document.getElementById("commandTable");
+
+commands.forEach(c=>{
+
+table.innerHTML += `
+
+<tr>
+<td>${c.command}</td>
+<td>${c.desc}</td>
+<td>${c.example}</td>
+</tr>
+
+`;
+
+});
+
+document.getElementById("search").addEventListener("input",function(){
+
+const val = this.value.toLowerCase();
+
+const results = document.getElementById("results");
+
+results.innerHTML="";
+
+commands.forEach(c=>{
+
+if(
+c.command.toLowerCase().includes(val) ||
+c.desc.toLowerCase().includes(val)
+){
+
+results.innerHTML += `
+
+<div class="command-card">
+
+<div class="command-title">
+${c.command}
+</div>
+
+<p>
+<b>Funzione:</b>
+${c.desc}
+</p>
+
+<p>
+<b>Esempio:</b>
+${c.example}
+</p>
+
+</div>
+
+`;
+
+}
+
+});
+
+});
+
+function analyzeText(){
+
+const text = document
+.getElementById("aiText")
+.value
+.toLowerCase();
+
+const result = document.getElementById("aiResult");
+
+let suggestions = [];
+
+if(text.includes("ssh")){
+
+suggestions.push("ip ssh version 2");
+suggestions.push("crypto key generate rsa");
+suggestions.push("line vty 0 4");
+
+}
+
+if(text.includes("vlan")){
+
+suggestions.push("vlan");
+suggestions.push("switchport access vlan");
+
+}
+
+if(
+text.includes("routing") ||
+text.includes("route")
+){
+
+suggestions.push("ip route");
+
+}
+
+if(
+text.includes("ospf")
+){
+
+suggestions.push("router ospf 1");
+suggestions.push("network");
+
+}
+
+if(
+text.includes("ip")
+){
+
+suggestions.push("ip address");
+
+}
+
+if(
+text.includes("salvare")
+){
+
+suggestions.push("copy running-config startup-config");
+
+}
+
+if(
+text.includes("interfaccia")
+){
+
+suggestions.push("interface");
+suggestions.push("no shutdown");
+
+}
+
+if(
+text.includes("acl")
+){
+
+suggestions.push("access-list");
+
+}
+
+if(
+suggestions.length===0
+){
+
+result.innerHTML=`
+
+<div class="ai-result">
+
+Nessun comando trovato.
+
+Prova a descrivere meglio la richiesta.
+
+</div>
+
+`;
+
+return;
+
+}
+
+let html = `
+<div class="ai-result">
+
+<h3>🤖 Comandi consigliati</h3>
+`;
+
+suggestions.forEach(s=>{
+
+html += `<span class="badge">${s}</span>`;
+
+});
+
+html += "</div>";
+
+result.innerHTML = html;
+
+}
+
 const cli = document.getElementById("cli");
+
 const input = document.getElementById("cliInput");
 
-let mode = "user"; // user, privileged, config
+let mode = "user";
 
 function print(text){
-  cli.innerHTML += text + "<br>";
-  cli.scrollTop = cli.scrollHeight;
+
+cli.innerHTML += text + "<br>";
+
+cli.scrollTop = cli.scrollHeight;
+
 }
 
 function getPrompt(){
-  if(mode==="user") return "Router>";
-  if(mode==="privileged") return "Router#";
-  if(mode==="config") return "Router(config)#";
+
+if(mode==="user") return "Router>";
+
+if(mode==="privileged") return "Router#";
+
+if(mode==="config") return "Router(config)#";
+
 }
 
-print("Cisco CLI Simulator");
+print("Cisco IOS CLI Simulator");
+print("Type 'enable'");
 
-input.addEventListener("keydown", function(e){
-  if(e.key==="Enter"){
-    const cmd = input.value.toLowerCase();
-    print("<span style='color:lime'>" + getPrompt() + " " + cmd + "</span>");
+input.addEventListener("keydown",function(e){
 
-    // modalità
-    if(cmd==="enable"){ mode="privileged"; }
-    else if(cmd==="configure terminal"){ mode="config"; }
-    else if(cmd==="exit"){ mode="user"; }
+if(e.key==="Enter"){
 
-    // trova comando
-    let found = commands.find(c => cmd.includes(c.desc));
+const cmd = input.value.toLowerCase();
 
-    if(found){
-      print(found.output);
-    } else {
-      print("% Comando non riconosciuto");
-    }
+print(
+"<span style='color:lime'>"
++
+getPrompt()
++
+" "
++
+cmd
++
+"</span>"
+);
 
-    input.value="";
-  }
+if(cmd==="enable"){
+
+mode="privileged";
+
+}
+
+else if(cmd==="configure terminal"){
+
+mode="config";
+
+}
+
+else if(cmd==="exit"){
+
+mode="user";
+
+}
+
+let found = commands.find(c =>
+cmd.includes(c.command.toLowerCase())
+);
+
+if(found){
+
+print(found.output);
+
+}else{
+
+print("% Invalid Cisco Command");
+
+}
+
+input.value="";
+
+}
+
 });
 
-// SEARCH
-document.getElementById("search").addEventListener("input", function(){
-  const val = this.value.toLowerCase();
-  const res = document.getElementById("results");
-  res.innerHTML="";
-
-  commands.forEach(c=>{
-    if(c.desc.includes(val)){
-      res.innerHTML += `<div class="command">${c.desc}</div>`;
-    }
-  });
-});
 </script>
 
 </body>
