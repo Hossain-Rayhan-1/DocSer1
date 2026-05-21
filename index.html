@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cisco Command Ultimate</title>
+<title>Cisco Ultimate IP Calculator</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -26,42 +29,32 @@ background-size:cover;
 background-position:center;
 background-attachment:fixed;
 color:white;
-overflow-x:hidden;
+padding:30px;
 }
 
 .container{
 max-width:1500px;
 margin:auto;
-padding:30px;
 }
 
 .hero{
-height:260px;
+height:220px;
 border-radius:25px;
+display:flex;
+justify-content:center;
+align-items:center;
 background:
 linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
 url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop');
 background-size:cover;
-background-position:center;
-display:flex;
-align-items:center;
-justify-content:center;
 margin-bottom:30px;
-box-shadow:0 15px 40px rgba(0,0,0,.5);
 }
 
 .hero h1{
-font-size:65px;
+font-size:60px;
 background:linear-gradient(90deg,#00c6ff,#0072ff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-}
-
-.subtitle{
-text-align:center;
-opacity:.8;
-margin-bottom:40px;
-font-size:18px;
 }
 
 .grid{
@@ -72,40 +65,27 @@ gap:25px;
 
 .glass{
 background:rgba(255,255,255,0.07);
-border:1px solid rgba(255,255,255,0.1);
-backdrop-filter:blur(15px);
-border-radius:20px;
+border:1px solid rgba(255,255,255,.1);
+backdrop-filter:blur(12px);
 padding:25px;
-box-shadow:0 10px 30px rgba(0,0,0,.4);
-transition:.3s;
+border-radius:20px;
 margin-bottom:25px;
-}
-
-.glass:hover{
-transform:translateY(-5px);
 }
 
 h2{
 margin-bottom:20px;
-font-size:24px;
 color:#00c6ff;
 }
 
-input, textarea, select{
+input{
 width:100%;
 padding:15px;
+margin-top:10px;
 border:none;
-outline:none;
 border-radius:12px;
-background:rgba(255,255,255,0.08);
+background:rgba(255,255,255,.08);
 color:white;
 font-size:15px;
-margin-top:10px;
-}
-
-textarea{
-height:130px;
-resize:none;
 }
 
 button{
@@ -117,50 +97,41 @@ background:linear-gradient(90deg,#00c6ff,#0072ff);
 color:white;
 font-weight:600;
 cursor:pointer;
-transition:.3s;
 }
 
 button:hover{
-transform:scale(1.05);
+transform:scale(1.03);
+}
+
+.result{
+margin-top:20px;
+padding:20px;
+border-radius:15px;
+background:rgba(0,114,255,.15);
+border:1px solid rgba(0,114,255,.4);
+line-height:1.8;
+overflow:auto;
 }
 
 table{
 width:100%;
 border-collapse:collapse;
 margin-top:20px;
-overflow:hidden;
-border-radius:15px;
 }
 
 th{
 background:#0072ff;
-padding:15px;
-font-size:15px;
+padding:12px;
 }
 
 td{
-padding:15px;
-border-bottom:1px solid rgba(255,255,255,0.1);
-background:rgba(255,255,255,0.03);
+padding:12px;
+border-bottom:1px solid rgba(255,255,255,.1);
 }
 
-tr:hover{
-background:rgba(255,255,255,0.05);
-}
-
-.command-card{
-background:rgba(255,255,255,0.05);
-padding:15px;
-margin-top:15px;
-border-radius:12px;
-border-left:4px solid #00c6ff;
-}
-
-.command-title{
-font-size:18px;
-font-weight:600;
-margin-bottom:10px;
-color:#00c6ff;
+.binary{
+font-family:monospace;
+color:#00ffcc;
 }
 
 .cli{
@@ -170,55 +141,13 @@ border-radius:15px;
 height:350px;
 overflow-y:auto;
 font-family:monospace;
-font-size:15px;
-box-shadow:inset 0 0 20px rgba(0,255,0,.2);
 }
 
 .cli-input{
 background:black;
 color:lime;
-font-family:monospace;
-margin-top:10px;
 border:1px solid rgba(0,255,0,.3);
-}
-
-.ai-result{
-margin-top:20px;
-padding:20px;
-border-radius:15px;
-background:rgba(0,114,255,.15);
-border:1px solid rgba(0,114,255,.4);
-}
-
-.badge{
-display:inline-block;
-padding:6px 12px;
-border-radius:30px;
-background:#0072ff;
-margin:5px;
-font-size:13px;
-}
-
-.info-box{
-background:rgba(255,255,255,0.05);
-padding:20px;
-border-radius:15px;
-margin-top:20px;
-line-height:1.8;
-}
-
-.result-box{
-margin-top:20px;
-padding:20px;
-border-radius:15px;
-background:rgba(0,255,150,.08);
-border:1px solid rgba(0,255,150,.3);
-line-height:1.8;
-}
-
-.binary{
 font-family:monospace;
-color:#00ffcc;
 }
 
 @media(max-width:1000px){
@@ -228,12 +157,13 @@ grid-template-columns:1fr;
 }
 
 .hero h1{
-font-size:42px;
+font-size:40px;
 }
 
 }
 
 </style>
+
 </head>
 
 <body>
@@ -241,120 +171,76 @@ font-size:42px;
 <div class="container">
 
 <div class="hero">
-<h1>⚡ Cisco Command Ultimate</h1>
+<h1>⚡ Cisco Ultimate Calculator</h1>
 </div>
-
-<p class="subtitle">
-Cisco encyclopedia + AI assistant + CLI simulator + IP Calculator
-</p>
 
 <div class="grid">
 
 <div>
 
-<div class="glass">
-
-<h2>🔍 Cerca Comandi Cisco</h2>
-
-<input id="search" placeholder="Es: ssh, vlan, ospf, nat...">
-
-<div id="results"></div>
-
-</div>
+<!-- ======================= -->
+<!-- IP CLASS CALCULATOR -->
+<!-- ======================= -->
 
 <div class="glass">
 
-<h2>🧠 Cisco Assistant</h2>
+<h2>🌐 Analizzatore IP</h2>
 
-<textarea id="aiText" placeholder="Scrivi cosa vuoi fare...
+<input id="ipAnalyze" placeholder="Es: 192.168.1.10">
 
-Esempi:
-- configurare ssh
-- creare vlan
-- configurare ospf
-"></textarea>
-
-<button onclick="analyzeText()">
-Analizza richiesta
+<button onclick="analyzeIP()">
+Analizza IP
 </button>
 
-<div id="aiResult"></div>
+<div id="analyzeResult" class="result"></div>
 
 </div>
+
+<!-- ======================= -->
+<!-- SUBNETTING CALCULATOR -->
+<!-- ======================= -->
 
 <div class="glass">
 
-<h2>🌐 Calcolatore IP & Subnetting</h2>
+<h2>🧠 Subnetting Calculator</h2>
 
-<input id="ipInput" placeholder="Es: 192.168.1.0">
+<input id="networkIp" placeholder="IP rete es: 198.168.40.0">
 
-<input id="maskInput" placeholder="Es: 255.255.255.0">
+<input id="neededHosts" placeholder="Host necessari es: 14">
 
-<input id="subnetInput" placeholder="Numero sottoreti (es: 16)">
-
-<button onclick="calculateIP()">
-Calcola
+<button onclick="calculateSubnetting()">
+Calcola Sottoreti
 </button>
 
-<div id="ipResult"></div>
-
-<div class="info-box">
-
-<h3>📘 Classi IP</h3>
-
-<p><b>Classe A</b>: 0.0.0.0 → 127.255.255.255</p>
-<p>Privato: 10.0.0.0</p>
-
-<p><b>Classe B</b>: 128.0.0.0 → 191.255.255.255</p>
-<p>Privato: 172.16.0.0 → 172.31.255.255</p>
-
-<p><b>Classe C</b>: 192.0.0.0 → 223.255.255.255</p>
-<p>Privato: 192.168.0.0</p>
-
-<p><b>Classe D</b>: 224.x.x.x</p>
-<p>Usata per multicasting</p>
-
-<br>
-
-<h3>📘 Regole subnetting</h3>
-
-<p>2^8 = 256 indirizzi</p>
-<p>256 - 2 = 254 host utili</p>
-
-<br>
-
-<p><b>255.255.255.240</b></p>
-
-<p class="binary">
-11110000 = 240
-</p>
-
-<p>16 sottoreti</p>
-
-<br>
-
-<p><b>255.255.255.192</b></p>
-
-<p class="binary">
-11000000
-</p>
-
-<p>2^6 = 64</p>
-<p>64 - 2 = 62 host</p>
-
-<br>
-
-<p><b>Loopback:</b> 127.0.0.0</p>
-
-<p>Non subnettabile per host normali</p>
+<div id="subnetResult" class="result"></div>
 
 </div>
+
+<!-- ======================= -->
+<!-- CIDR CALCULATOR -->
+<!-- ======================= -->
+
+<div class="glass">
+
+<h2>📡 CIDR Calculator</h2>
+
+<input id="cidrInput" placeholder="Es: /28">
+
+<button onclick="calculateCIDR()">
+Calcola CIDR
+</button>
+
+<div id="cidrResult" class="result"></div>
 
 </div>
 
 </div>
 
 <div>
+
+<!-- ======================= -->
+<!-- CLI -->
+<!-- ======================= -->
 
 <div class="glass">
 
@@ -366,28 +252,85 @@ Calcola
 id="cliInput"
 class="cli-input"
 placeholder="Scrivi comando Cisco..."
-autofocus
 >
 
 </div>
 
-</div>
-
-</div>
+<!-- ======================= -->
+<!-- THEORY -->
+<!-- ======================= -->
 
 <div class="glass">
 
-<h2>📚 Database Comandi Cisco</h2>
+<h2>📘 Teoria Rapida</h2>
 
-<table id="commandTable">
+<div class="result">
 
-<tr>
-<th>Comando</th>
-<th>Cosa Fa</th>
-<th>Esempio</th>
-</tr>
+<p><b>Classe A</b></p>
 
-</table>
+<p>0 - 127</p>
+
+<p>Mask: 255.0.0.0</p>
+
+<br>
+
+<p><b>Classe B</b></p>
+
+<p>128 - 191</p>
+
+<p>Mask: 255.255.0.0</p>
+
+<br>
+
+<p><b>Classe C</b></p>
+
+<p>192 - 223</p>
+
+<p>Mask: 255.255.255.0</p>
+
+<br>
+
+<p><b>Classe D</b></p>
+
+<p>224+</p>
+
+<p>Multicast</p>
+
+<br>
+
+<p><b>Formula host</b></p>
+
+<p class="binary">
+2^n - 2
+</p>
+
+<br>
+
+<p><b>255.255.255.240</b></p>
+
+<p class="binary">
+11110000 = 240
+</p>
+
+<p>16 subnet</p>
+
+<p>14 host</p>
+
+<br>
+
+<p><b>255.255.255.192</b></p>
+
+<p class="binary">
+11000000
+</p>
+
+<p>62 host</p>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
@@ -395,332 +338,376 @@ autofocus
 
 <script>
 
-const commands = [
+function analyzeIP(){
 
-{
-command:"enable",
-desc:"Entra nella modalità privilegiata",
-example:"Router> enable",
-output:"Modalità privilegiata attiva"
-},
+const ip = document.getElementById("ipAnalyze").value;
 
-{
-command:"configure terminal",
-desc:"Entra nella configurazione globale",
-example:"Router# configure terminal",
-output:"Entrato in configurazione globale"
-},
+const result = document.getElementById("analyzeResult");
 
-{
-command:"hostname",
-desc:"Cambia nome al router",
-example:"hostname R1",
-output:"Hostname configurato"
-},
+if(!ip){
 
-{
-command:"interface",
-desc:"Entra in una interfaccia",
-example:"interface g0/0",
-output:"Interfaccia aperta"
-},
-
-{
-command:"ip address",
-desc:"Assegna un indirizzo IP",
-example:"ip address 192.168.1.1 255.255.255.0",
-output:"IP assegnato"
-},
-
-{
-command:"no shutdown",
-desc:"Attiva interfaccia",
-example:"no shutdown",
-output:"Interfaccia attivata"
-},
-
-{
-command:"show ip interface brief",
-desc:"Mostra tutte le interfacce",
-example:"show ip interface brief",
-output:"Gig0/0 up up"
-},
-
-{
-command:"copy running-config startup-config",
-desc:"Salva configurazione",
-example:"copy running-config startup-config",
-output:"Configuration saved"
-},
-
-{
-command:"ip route",
-desc:"Crea routing statico",
-example:"ip route 0.0.0.0 0.0.0.0 10.0.0.1",
-output:"Rotta aggiunta"
-},
-
-{
-command:"router ospf 1",
-desc:"Abilita OSPF",
-example:"router ospf 1",
-output:"OSPF avviato"
-},
-
-{
-command:"vlan",
-desc:"Crea VLAN",
-example:"vlan 10",
-output:"VLAN creata"
-},
-
-{
-command:"switchport access vlan",
-desc:"Assegna VLAN alla porta",
-example:"switchport access vlan 10",
-output:"Porta assegnata alla VLAN"
-},
-
-{
-command:"crypto key generate rsa",
-desc:"Genera chiavi RSA",
-example:"crypto key generate rsa",
-output:"Chiavi RSA generate"
-},
-
-{
-command:"ip ssh version 2",
-desc:"Abilita SSH",
-example:"ip ssh version 2",
-output:"SSH attivato"
-},
-
-{
-command:"line vty 0 4",
-desc:"Configura accesso remoto",
-example:"line vty 0 4",
-output:"VTY configurato"
-},
-
-{
-command:"access-list",
-desc:"Crea ACL",
-example:"access-list 1 permit any",
-output:"ACL creata"
-},
-
-{
-command:"ping",
-desc:"Testa connettività",
-example:"ping 8.8.8.8",
-output:"!!!!! Success"
-},
-
-{
-command:"reload",
-desc:"Riavvia dispositivo",
-example:"reload",
-output:"System restarting..."
-}
-
-];
-
-const table = document.getElementById("commandTable");
-
-commands.forEach(c=>{
-
-table.innerHTML += `
-<tr>
-<td>${c.command}</td>
-<td>${c.desc}</td>
-<td>${c.example}</td>
-</tr>
-`;
-
-});
-
-document.getElementById("search").addEventListener("input",function(){
-
-const val = this.value.toLowerCase();
-
-const results = document.getElementById("results");
-
-results.innerHTML="";
-
-commands.forEach(c=>{
-
-if(
-c.command.toLowerCase().includes(val) ||
-c.desc.toLowerCase().includes(val)
-){
-
-results.innerHTML += `
-<div class="command-card">
-
-<div class="command-title">
-${c.command}
-</div>
-
-<p><b>Funzione:</b> ${c.desc}</p>
-
-<p><b>Esempio:</b> ${c.example}</p>
-
-</div>
-`;
-
-}
-
-});
-
-});
-
-function analyzeText(){
-
-const text = document
-.getElementById("aiText")
-.value
-.toLowerCase();
-
-const result = document.getElementById("aiResult");
-
-let suggestions = [];
-
-if(text.includes("ssh")){
-
-suggestions.push("ip ssh version 2");
-suggestions.push("crypto key generate rsa");
-suggestions.push("line vty 0 4");
-
-}
-
-if(text.includes("vlan")){
-
-suggestions.push("vlan");
-suggestions.push("switchport access vlan");
-
-}
-
-if(text.includes("route")){
-
-suggestions.push("ip route");
-
-}
-
-if(text.includes("ospf")){
-
-suggestions.push("router ospf 1");
-
-}
-
-if(text.includes("acl")){
-
-suggestions.push("access-list");
-
-}
-
-if(suggestions.length===0){
-
-result.innerHTML=`
-<div class="ai-result">
-Nessun comando trovato.
-</div>
-`;
-
+result.innerHTML="Inserisci IP";
 return;
 
 }
 
-let html = `
-<div class="ai-result">
-<h3>🤖 Comandi consigliati</h3>
-`;
+const octets = ip.split(".");
 
-suggestions.forEach(s=>{
+const first = parseInt(octets[0]);
 
-html += `<span class="badge">${s}</span>`;
+let classe = "";
+let mask = "";
+let type = "Pubblico";
 
-});
+if(first>=0 && first<=127){
 
-html += "</div>";
+classe="Classe A";
+mask="255.0.0.0";
 
-result.innerHTML = html;
+if(first===10){
+
+type="Privato";
 
 }
 
-const cli = document.getElementById("cli");
+}
 
-const input = document.getElementById("cliInput");
+else if(first>=128 && first<=191){
 
-let mode = "user";
+classe="Classe B";
+mask="255.255.0.0";
+
+if(first===172){
+
+const second=parseInt(octets[1]);
+
+if(second>=16 && second<=31){
+
+type="Privato";
+
+}
+
+}
+
+}
+
+else if(first>=192 && first<=223){
+
+classe="Classe C";
+mask="255.255.255.0";
+
+if(first===192 && octets[1]==168){
+
+type="Privato";
+
+}
+
+}
+
+else if(first>=224){
+
+classe="Classe D";
+mask="Multicast";
+
+}
+
+result.innerHTML=`
+
+<h3>📊 Analisi IP</h3>
+
+<p><b>IP:</b> ${ip}</p>
+
+<p><b>Classe:</b> ${classe}</p>
+
+<p><b>Tipo:</b> ${type}</p>
+
+<p><b>Mask default:</b> ${mask}</p>
+
+<p><b>Binario:</b></p>
+
+<p class="binary">
+
+${octets.map(o=>parseInt(o).toString(2).padStart(8,"0")).join(".")}
+
+</p>
+
+`;
+
+}
+
+function calculateSubnetting(){
+
+const ip = document.getElementById("networkIp").value;
+
+const hostsNeeded = parseInt(
+document.getElementById("neededHosts").value
+);
+
+const result = document.getElementById("subnetResult");
+
+if(!ip || !hostsNeeded){
+
+result.innerHTML="Inserisci dati";
+return;
+
+}
+
+let hostBits=0;
+
+while((Math.pow(2,hostBits)-2)<hostsNeeded){
+
+hostBits++;
+
+}
+
+const usableHosts=Math.pow(2,hostBits)-2;
+
+const cidr=32-hostBits;
+
+function cidrToMask(cidr){
+
+let mask=[];
+
+for(let i=0;i<4;i++){
+
+let n=Math.min(8,cidr);
+
+mask.push(
+256-Math.pow(2,8-n)
+);
+
+cidr-=n;
+
+if(mask[i]===256){
+mask[i]=255;
+}
+
+if(n===0){
+mask[i]=0;
+}
+
+}
+
+return mask.join(".");
+
+}
+
+const subnetMask=cidrToMask(cidr);
+
+const increment=Math.pow(2,hostBits);
+
+const totalSubnets=256/increment;
+
+const base=ip.split(".");
+
+let subnetHTML="";
+
+for(let i=0;i<256;i+=increment){
+
+const network=
+`${base[0]}.${base[1]}.${base[2]}.${i}`;
+
+const hostStart=
+`${base[0]}.${base[1]}.${base[2]}.${i+1}`;
+
+const hostEnd=
+`${base[0]}.${base[1]}.${base[2]}.${i+increment-2}`;
+
+const broadcast=
+`${base[0]}.${base[1]}.${base[2]}.${i+increment-1}`;
+
+subnetHTML += `
+
+<tr>
+
+<td>${network}</td>
+
+<td>${hostStart}</td>
+
+<td>${hostEnd}</td>
+
+<td>${broadcast}</td>
+
+</tr>
+
+`;
+
+}
+
+result.innerHTML=`
+
+<h3>📘 Risultato</h3>
+
+<p><b>Host richiesti:</b> ${hostsNeeded}</p>
+
+<p><b>Bit host:</b> ${hostBits}</p>
+
+<p><b>Subnet Mask:</b> ${subnetMask}</p>
+
+<p><b>CIDR:</b> /${cidr}</p>
+
+<p><b>Host disponibili:</b> ${usableHosts}</p>
+
+<p><b>Incremento:</b> ${increment}</p>
+
+<p><b>Numero sottoreti:</b> ${totalSubnets}</p>
+
+<hr>
+
+<p><b>Calcolo:</b></p>
+
+<p class="binary">
+
+2^${hostBits} = ${Math.pow(2,hostBits)}
+
+</p>
+
+<p class="binary">
+
+${Math.pow(2,hostBits)} - 2 = ${usableHosts}
+
+</p>
+
+<hr>
+
+<table>
+
+<tr>
+
+<th>Rete</th>
+
+<th>Host da</th>
+
+<th>Host a</th>
+
+<th>Broadcast</th>
+
+</tr>
+
+${subnetHTML}
+
+</table>
+
+`;
+
+}
+
+function calculateCIDR(){
+
+const cidr=parseInt(
+document.getElementById("cidrInput")
+.value.replace("/","")
+);
+
+const result=document.getElementById("cidrResult");
+
+if(isNaN(cidr)){
+
+result.innerHTML="Inserisci CIDR valido";
+return;
+
+}
+
+function cidrToMask(cidr){
+
+let mask=[];
+
+for(let i=0;i<4;i++){
+
+let n=Math.min(8,cidr);
+
+mask.push(
+256-Math.pow(2,8-n)
+);
+
+cidr-=n;
+
+if(mask[i]===256){
+mask[i]=255;
+}
+
+if(n===0){
+mask[i]=0;
+}
+
+}
+
+return mask.join(".");
+
+}
+
+const mask=cidrToMask(cidr);
+
+const hostBits=32-cidr;
+
+const hosts=Math.pow(2,hostBits)-2;
+
+result.innerHTML=`
+
+<h3>📡 CIDR Analysis</h3>
+
+<p><b>CIDR:</b> /${cidr}</p>
+
+<p><b>Subnet Mask:</b> ${mask}</p>
+
+<p><b>Bit host:</b> ${hostBits}</p>
+
+<p><b>Host disponibili:</b> ${hosts}</p>
+
+<p class="binary">
+
+2^${hostBits} - 2 = ${hosts}
+
+</p>
+
+`;
+
+}
+
+const cli=document.getElementById("cli");
+
+const input=document.getElementById("cliInput");
 
 function print(text){
 
 cli.innerHTML += text + "<br>";
 
-cli.scrollTop = cli.scrollHeight;
-
-}
-
-function getPrompt(){
-
-if(mode==="user") return "Router>";
-
-if(mode==="privileged") return "Router#";
-
-if(mode==="config") return "Router(config)#";
+cli.scrollTop=cli.scrollHeight;
 
 }
 
 print("Cisco IOS CLI Simulator");
-print("Type 'enable'");
 
 input.addEventListener("keydown",function(e){
 
 if(e.key==="Enter"){
 
-const cmd = input.value.toLowerCase();
+const cmd=input.value;
 
-print(
-"<span style='color:lime'>"
-+
-getPrompt()
-+
-" "
-+
-cmd
-+
-"</span>"
-);
+print("<span style='color:lime'>Router# "+cmd+"</span>");
 
-if(cmd==="enable"){
+if(cmd==="show ip interface brief"){
 
-mode="privileged";
+print("Gig0/0 up up");
+print("Gig0/1 up up");
 
 }
 
-else if(cmd==="configure terminal"){
+else if(cmd==="show running-config"){
 
-mode="config";
-
-}
-
-else if(cmd==="exit"){
-
-mode="user";
+print("Current configuration...");
 
 }
 
-let found = commands.find(c =>
-cmd.includes(c.command.toLowerCase())
-);
+else if(cmd==="ping 8.8.8.8"){
 
-if(found){
+print("!!!!! SUCCESS");
 
-print(found.output);
+}
 
-}else{
+else{
 
-print("% Invalid Cisco Command");
+print("% Command accepted");
 
 }
 
@@ -730,104 +717,8 @@ input.value="";
 
 });
 
-function calculateIP(){
-
-const ip = document.getElementById("ipInput").value;
-const mask = document.getElementById("maskInput").value;
-const subnet = document.getElementById("subnetInput").value;
-
-const result = document.getElementById("ipResult");
-
-if(ip===""){
-
-result.innerHTML = `
-<div class="result-box">
-Inserisci un IP valido
-</div>
-`;
-
-return;
-
-}
-
-let firstOctet = parseInt(ip.split(".")[0]);
-
-let classe = "";
-let defaultMask = "";
-
-if(firstOctet >=0 && firstOctet <=127){
-
-classe = "Classe A";
-defaultMask = "255.0.0.0";
-
-}
-
-else if(firstOctet >=128 && firstOctet <=191){
-
-classe = "Classe B";
-defaultMask = "255.255.0.0";
-
-}
-
-else if(firstOctet >=192 && firstOctet <=223){
-
-classe = "Classe C";
-defaultMask = "255.255.255.0";
-
-}
-
-else if(firstOctet >=224){
-
-classe = "Classe D (Multicast)";
-defaultMask = "N/A";
-
-}
-
-let hosts = "";
-
-if(mask==="255.255.255.0"){
-
-hosts = "254 host utili";
-
-}
-
-if(mask==="255.255.255.192"){
-
-hosts = "62 host utili";
-
-}
-
-if(mask==="255.255.255.240"){
-
-hosts = "14 host utili";
-
-}
-
-result.innerHTML = `
-
-<div class="result-box">
-
-<h3>📊 Risultato Analisi IP</h3>
-
-<p><b>IP:</b> ${ip}</p>
-
-<p><b>Classe:</b> ${classe}</p>
-
-<p><b>Subnet Mask:</b> ${mask || defaultMask}</p>
-
-<p><b>Mask di default:</b> ${defaultMask}</p>
-
-<p><b>Host disponibili:</b> ${hosts}</p>
-
-<p><b>Sottoreti:</b> ${subnet || "Non specificato"}</p>
-
-</div>
-
-`;
-
-}
-
 </script>
 
 </body>
+
 </html>
