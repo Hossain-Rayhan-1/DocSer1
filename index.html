@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cisco Command </title>
+<title>Cisco Command Ultimate</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -30,16 +30,28 @@ overflow-x:hidden;
 }
 
 .container{
-max-width:1400px;
+max-width:1500px;
 margin:auto;
 padding:30px;
 }
 
-h1{
-text-align:center;
-font-size:55px;
-font-weight:700;
-margin-bottom:20px;
+.hero{
+height:260px;
+border-radius:25px;
+background:
+linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop');
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+margin-bottom:30px;
+box-shadow:0 15px 40px rgba(0,0,0,.5);
+}
+
+.hero h1{
+font-size:65px;
 background:linear-gradient(90deg,#00c6ff,#0072ff);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
@@ -66,6 +78,7 @@ border-radius:20px;
 padding:25px;
 box-shadow:0 10px 30px rgba(0,0,0,.4);
 transition:.3s;
+margin-bottom:25px;
 }
 
 .glass:hover{
@@ -78,7 +91,7 @@ font-size:24px;
 color:#00c6ff;
 }
 
-input, textarea{
+input, textarea, select{
 width:100%;
 padding:15px;
 border:none;
@@ -186,23 +199,26 @@ margin:5px;
 font-size:13px;
 }
 
-.hero{
-height:250px;
-border-radius:25px;
-background:
-linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
-url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1600&auto=format&fit=crop');
-background-size:cover;
-background-position:center;
-display:flex;
-align-items:center;
-justify-content:center;
-margin-bottom:30px;
-box-shadow:0 15px 40px rgba(0,0,0,.5);
+.info-box{
+background:rgba(255,255,255,0.05);
+padding:20px;
+border-radius:15px;
+margin-top:20px;
+line-height:1.8;
 }
 
-.hero h1{
-font-size:60px;
+.result-box{
+margin-top:20px;
+padding:20px;
+border-radius:15px;
+background:rgba(0,255,150,.08);
+border:1px solid rgba(0,255,150,.3);
+line-height:1.8;
+}
+
+.binary{
+font-family:monospace;
+color:#00ffcc;
 }
 
 @media(max-width:1000px){
@@ -212,7 +228,7 @@ grid-template-columns:1fr;
 }
 
 .hero h1{
-font-size:40px;
+font-size:42px;
 }
 
 }
@@ -225,11 +241,11 @@ font-size:40px;
 <div class="container">
 
 <div class="hero">
-<h1>⚡ Cisco Command</h1>
+<h1>⚡ Cisco Command Ultimate</h1>
 </div>
 
 <p class="subtitle">
-Cisco command encyclopedia + AI assistant + CLI simulator
+Cisco encyclopedia + AI assistant + CLI simulator + IP Calculator
 </p>
 
 <div class="grid">
@@ -253,9 +269,8 @@ Cisco command encyclopedia + AI assistant + CLI simulator
 <textarea id="aiText" placeholder="Scrivi cosa vuoi fare...
 
 Esempi:
-- voglio configurare ssh
+- configurare ssh
 - creare vlan
-- impostare routing statico
 - configurare ospf
 "></textarea>
 
@@ -264,6 +279,76 @@ Analizza richiesta
 </button>
 
 <div id="aiResult"></div>
+
+</div>
+
+<div class="glass">
+
+<h2>🌐 Calcolatore IP & Subnetting</h2>
+
+<input id="ipInput" placeholder="Es: 192.168.1.0">
+
+<input id="maskInput" placeholder="Es: 255.255.255.0">
+
+<input id="subnetInput" placeholder="Numero sottoreti (es: 16)">
+
+<button onclick="calculateIP()">
+Calcola
+</button>
+
+<div id="ipResult"></div>
+
+<div class="info-box">
+
+<h3>📘 Classi IP</h3>
+
+<p><b>Classe A</b>: 0.0.0.0 → 127.255.255.255</p>
+<p>Privato: 10.0.0.0</p>
+
+<p><b>Classe B</b>: 128.0.0.0 → 191.255.255.255</p>
+<p>Privato: 172.16.0.0 → 172.31.255.255</p>
+
+<p><b>Classe C</b>: 192.0.0.0 → 223.255.255.255</p>
+<p>Privato: 192.168.0.0</p>
+
+<p><b>Classe D</b>: 224.x.x.x</p>
+<p>Usata per multicasting</p>
+
+<br>
+
+<h3>📘 Regole subnetting</h3>
+
+<p>2^8 = 256 indirizzi</p>
+<p>256 - 2 = 254 host utili</p>
+
+<br>
+
+<p><b>255.255.255.240</b></p>
+
+<p class="binary">
+11110000 = 240
+</p>
+
+<p>16 sottoreti</p>
+
+<br>
+
+<p><b>255.255.255.192</b></p>
+
+<p class="binary">
+11000000
+</p>
+
+<p>2^6 = 64</p>
+<p>64 - 2 = 62 host</p>
+
+<br>
+
+<p><b>Loopback:</b> 127.0.0.0</p>
+
+<p>Non subnettabile per host normali</p>
+
+</div>
 
 </div>
 
@@ -362,13 +447,6 @@ output:"Gig0/0 up up"
 },
 
 {
-command:"show running-config",
-desc:"Mostra configurazione attuale",
-example:"show running-config",
-output:"Current configuration..."
-},
-
-{
 command:"copy running-config startup-config",
 desc:"Salva configurazione",
 example:"copy running-config startup-config",
@@ -387,13 +465,6 @@ command:"router ospf 1",
 desc:"Abilita OSPF",
 example:"router ospf 1",
 output:"OSPF avviato"
-},
-
-{
-command:"network",
-desc:"Aggiunge rete a OSPF",
-example:"network 192.168.1.0 0.0.0.255 area 0",
-output:"Network aggiunta"
 },
 
 {
@@ -425,13 +496,6 @@ output:"SSH attivato"
 },
 
 {
-command:"username",
-desc:"Crea utente",
-example:"username admin secret cisco",
-output:"Utente creato"
-},
-
-{
 command:"line vty 0 4",
 desc:"Configura accesso remoto",
 example:"line vty 0 4",
@@ -453,24 +517,10 @@ output:"!!!!! Success"
 },
 
 {
-command:"traceroute",
-desc:"Mostra percorso pacchetti",
-example:"traceroute 8.8.8.8",
-output:"Tracing route..."
-},
-
-{
 command:"reload",
 desc:"Riavvia dispositivo",
 example:"reload",
 output:"System restarting..."
-},
-
-{
-command:"show vlan brief",
-desc:"Mostra VLAN",
-example:"show vlan brief",
-output:"VLAN 10 active"
 }
 
 ];
@@ -480,13 +530,11 @@ const table = document.getElementById("commandTable");
 commands.forEach(c=>{
 
 table.innerHTML += `
-
 <tr>
 <td>${c.command}</td>
 <td>${c.desc}</td>
 <td>${c.example}</td>
 </tr>
-
 `;
 
 });
@@ -507,25 +555,17 @@ c.desc.toLowerCase().includes(val)
 ){
 
 results.innerHTML += `
-
 <div class="command-card">
 
 <div class="command-title">
 ${c.command}
 </div>
 
-<p>
-<b>Funzione:</b>
-${c.desc}
-</p>
+<p><b>Funzione:</b> ${c.desc}</p>
 
-<p>
-<b>Esempio:</b>
-${c.example}
-</p>
+<p><b>Esempio:</b> ${c.example}</p>
 
 </div>
-
 `;
 
 }
@@ -560,71 +600,30 @@ suggestions.push("switchport access vlan");
 
 }
 
-if(
-text.includes("routing") ||
-text.includes("route")
-){
+if(text.includes("route")){
 
 suggestions.push("ip route");
 
 }
 
-if(
-text.includes("ospf")
-){
+if(text.includes("ospf")){
 
 suggestions.push("router ospf 1");
-suggestions.push("network");
 
 }
 
-if(
-text.includes("ip")
-){
-
-suggestions.push("ip address");
-
-}
-
-if(
-text.includes("salvare")
-){
-
-suggestions.push("copy running-config startup-config");
-
-}
-
-if(
-text.includes("interfaccia")
-){
-
-suggestions.push("interface");
-suggestions.push("no shutdown");
-
-}
-
-if(
-text.includes("acl")
-){
+if(text.includes("acl")){
 
 suggestions.push("access-list");
 
 }
 
-if(
-suggestions.length===0
-){
+if(suggestions.length===0){
 
 result.innerHTML=`
-
 <div class="ai-result">
-
 Nessun comando trovato.
-
-Prova a descrivere meglio la richiesta.
-
 </div>
-
 `;
 
 return;
@@ -633,7 +632,6 @@ return;
 
 let html = `
 <div class="ai-result">
-
 <h3>🤖 Comandi consigliati</h3>
 `;
 
@@ -731,6 +729,103 @@ input.value="";
 }
 
 });
+
+function calculateIP(){
+
+const ip = document.getElementById("ipInput").value;
+const mask = document.getElementById("maskInput").value;
+const subnet = document.getElementById("subnetInput").value;
+
+const result = document.getElementById("ipResult");
+
+if(ip===""){
+
+result.innerHTML = `
+<div class="result-box">
+Inserisci un IP valido
+</div>
+`;
+
+return;
+
+}
+
+let firstOctet = parseInt(ip.split(".")[0]);
+
+let classe = "";
+let defaultMask = "";
+
+if(firstOctet >=0 && firstOctet <=127){
+
+classe = "Classe A";
+defaultMask = "255.0.0.0";
+
+}
+
+else if(firstOctet >=128 && firstOctet <=191){
+
+classe = "Classe B";
+defaultMask = "255.255.0.0";
+
+}
+
+else if(firstOctet >=192 && firstOctet <=223){
+
+classe = "Classe C";
+defaultMask = "255.255.255.0";
+
+}
+
+else if(firstOctet >=224){
+
+classe = "Classe D (Multicast)";
+defaultMask = "N/A";
+
+}
+
+let hosts = "";
+
+if(mask==="255.255.255.0"){
+
+hosts = "254 host utili";
+
+}
+
+if(mask==="255.255.255.192"){
+
+hosts = "62 host utili";
+
+}
+
+if(mask==="255.255.255.240"){
+
+hosts = "14 host utili";
+
+}
+
+result.innerHTML = `
+
+<div class="result-box">
+
+<h3>📊 Risultato Analisi IP</h3>
+
+<p><b>IP:</b> ${ip}</p>
+
+<p><b>Classe:</b> ${classe}</p>
+
+<p><b>Subnet Mask:</b> ${mask || defaultMask}</p>
+
+<p><b>Mask di default:</b> ${defaultMask}</p>
+
+<p><b>Host disponibili:</b> ${hosts}</p>
+
+<p><b>Sottoreti:</b> ${subnet || "Non specificato"}</p>
+
+</div>
+
+`;
+
+}
 
 </script>
 
